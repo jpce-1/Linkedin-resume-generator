@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Resume Generator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            max-width: 540px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #16213e;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .steps {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .steps p {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .steps strong {
+            color: #16213e;
+        }
+
+        .upload-area {
+            border: 2px dashed #c0d0e0;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 24px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .upload-area:hover { border-color: #0077b5; }
+
+        .upload-area input { display: none; }
+
+        .upload-area label {
+            cursor: pointer;
+            color: #0077b5;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .upload-area p {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        #file-name {
+            font-size: 13px;
+            color: #16213e;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        button {
+            background: #0077b5;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        button:hover { background: #005f8e; }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+            color: #0077b5;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 LinkedIn Resume Generator</h1>
+        <p class="subtitle">Turn your LinkedIn profile into 3 professional resumes instantly</p>
+
+        <div class="steps">
+            <p><strong>How to get your LinkedIn data:</strong></p>
+            <p>1. Go to LinkedIn → Settings & Privacy</p>
+            <p>2. Left sidebar → Data Privacy</p>
+            <p>3. Click "Download your data"</p>
+            <p>4. Tick Profile, Positions, Education, Skills & Certifications</p>
+            <p>5. Click Request archive and wait for LinkedIn's email</p>
+            <p>6. Download the ZIP file and upload it below ⬇️</p>
+        </div>
+
+        <form action="/generate" method="POST" enctype="multipart/form-data" id="upload-form">
+            <div class="upload-area">
+                <input type="file" name="linkedin_zip" id="linkedin_zip" accept=".zip">
+                <label for="linkedin_zip">📁 Click to upload your LinkedIn ZIP file</label>
+                <p>Only .zip files accepted</p>
+                <p id="file-name"></p>
+            </div>
+            <button type="submit" id="submit-btn">Generate My Resumes ✨</button>
+            <p class="loading" id="loading">⏳ Generating your 3 resumes... this takes about 15 seconds</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('linkedin_zip').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : '';
+            document.getElementById('file-name').textContent = fileName ? '✅ ' + fileName : '';
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('submit-btn').textContent = 'Generating...';
+            document.getElementById('loading').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
