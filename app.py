@@ -34,9 +34,9 @@ def generate():
     from pdf_generator import create_pdf
 
     profile_data = parse_linkedin_zip(zip_path)
-    # resumes = generate_resumes(profile_data)
-    from resume_generator import generate_resumes_test
-    resumes = generate_resumes_test(profile_data)
+    resumes = generate_resumes(profile_data)
+    #from resume_generator import generate_resumes_test
+    #resumes = generate_resumes_test(profile_data)
 
     pdf_paths = []
     for i, resume in enumerate(resumes, 1):

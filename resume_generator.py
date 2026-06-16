@@ -1,7 +1,7 @@
 import os
-import anthropic
+from groq import Groq
 
-client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
+client = Groq(api_key=os.getenv('GROQ_API_KEY'))
 
 def format_profile_for_prompt(profile_data):
     profile = profile_data['profile']
@@ -76,22 +76,26 @@ Write the complete resume now. Use clear sections with headers in ALL CAPS.
 Do not add any commentary — just the resume content itself.
 """
 
-    response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=1500,
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
         messages=[
             {"role": "user", "content": prompt}
-        ]
+        ],
+        max_tokens=1500
     )
+    
+    resume_text = response.choices[0].message.content
+    resume_text = resume_text.replace('**', '')
+    return resume_text
+    
 
-    return response.content[0].text
+   
 
 
 def generate_resumes(profile_data):
     profile_text = format_profile_for_prompt(profile_data)
 
     resumes = []
-
     styles = ['professional', 'modern', 'creative']
     style_names = ['Professional', 'ATS Optimized', 'Creative']
 
@@ -104,87 +108,3 @@ def generate_resumes(profile_data):
         })
 
     return resumes
-
-def generate_resumes_test(profile_data):
-    profile = profile_data['profile']
-    name = f"{profile.get('first_name')} {profile.get('last_name')}"
-
-    dummy_resumes = [
-        {
-            'style': 'Professional',
-            'content': f"""
-{name}
-{profile.get('headline')}
-{profile.get('email')} | {profile.get('location')}
-
-SUMMARY
-{profile.get('summary')}
-
-EXPERIENCE
-Test Company | Software Developer
-January 2023 - Present
-Developed and maintained web applications using Python and Flask.
-
-EDUCATION
-Test University | Computer Science
-2019 - 2023
-
-SKILLS
-Python, Flask, SQL, HTML, CSS
-
-CERTIFICATIONS
-Test Certification | Test Authority
-"""
-        },
-        {
-            'style': 'ATS Optimized',
-            'content': f"""
-{name}
-{profile.get('email')} | {profile.get('location')}
-
-PROFESSIONAL SUMMARY
-Results-driven professional with expertise in Python development and automation.
-
-CORE SKILLS
-Python | Flask | SQL | REST APIs | HTML | CSS | Git
-
-EXPERIENCE
-Test Company | Software Developer
-January 2023 - Present
-Delivered 10+ automation tools reducing manual work by 40%.
-
-EDUCATION
-Test University | Computer Science | 2019 - 2023
-
-CERTIFICATIONS
-Test Certification | Test Authority
-"""
-        },
-        {
-            'style': 'Creative',
-            'content': f"""
-{name}
-{profile.get('headline')}
-{profile.get('email')} | {profile.get('location')}
-
-PERSONAL BRAND
-Passionate developer who builds tools that make people's lives easier.
-
-CORE SKILLS
-Python | Flask | AI Integration | Web Development | Automation
-
-EXPERIENCE
-Test Company | Software Developer
-January 2023 - Present
-Built AI-powered tools used by 100+ users daily.
-
-EDUCATION
-Test University | Computer Science | 2019 - 2023
-
-CERTIFICATIONS
-Test Certification | Test Authority
-"""
-        }
-    ]
-
-    return dummy_resumes
