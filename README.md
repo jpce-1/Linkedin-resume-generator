@@ -1,22 +1,22 @@
-# 🚀 LinkedIn Resume Generator
+#  LinkedIn Resume Generator
 
 An AI-powered web app that transforms your LinkedIn profile data into 3 professionally written resume styles instantly — powered by Claude AI.
 
 ---
 
-## ✨ Features
+##  Features
 
-- 📄 Generates **3 unique resume styles** from your LinkedIn data:
+-  Generates **3 unique resume styles** from your LinkedIn data:
   - **Professional** — Traditional corporate format with formal language
   - **ATS Optimized** — Keyword-rich format designed to pass applicant tracking systems
   - **Creative** — Bold, skills-first format that stands out
-- 📥 **Instant PDF download** for each resume variant
-- 🔒 **Privacy first** — uses LinkedIn's official data export, no scraping
-- ⚡ Fast generation powered by Claude Haiku AI
+-  **Instant PDF download** for each resume variant
+-  **Privacy first** — uses LinkedIn's official data export, no scraping
+-  Fast generation powered by Claude Haiku AI
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Backend** — Python, Flask
 - **AI** — Anthropic Claude API (claude-haiku-4-5)
@@ -25,7 +25,7 @@ An AI-powered web app that transforms your LinkedIn profile data into 3 professi
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 **1. Clone the repo**
 
@@ -65,7 +65,7 @@ Open your browser at `http://127.0.0.1:5000`
 
 ---
 
-## 📦 How to Get Your LinkedIn Data
+##  How to Get Your LinkedIn Data
 
 1. Go to LinkedIn → **Settings & Privacy**
 2. Left sidebar → **Data Privacy**
@@ -76,7 +76,7 @@ Open your browser at `http://127.0.0.1:5000`
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 linkedin-resume-generator/
@@ -96,7 +96,7 @@ linkedin-resume-generator/
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 - [ ] Job description input to tailor resumes to specific roles
 - [ ] ATS score checker for each resume variant
@@ -105,7 +105,7 @@ linkedin-resume-generator/
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **JP** — [GitHub](https://github.com/jpce-1) · [LinkedIn](www.linkedin.com/in/johnpaul-ehiemere-22563b397) 
 
